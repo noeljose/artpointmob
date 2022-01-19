@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet,ScrollView, Dimensions, Image, Button,TextInput} from 'react-native';
 import { API, IMG } from '../data';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+
 // import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 export default function NewOrder({navigation,route}) {
@@ -59,6 +59,9 @@ export default function NewOrder({navigation,route}) {
         shipping_address :  ""
   })
 
+  useEffect( async ()=>{
+
+  })
 
 
 
