@@ -3,6 +3,7 @@ import { API } from "../data";
 import { Text, View, TextInput ,Button, StyleSheet, Dimensions, Alert} from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import localStorage from "@react-native-async-storage/async-storage"
+import Version from "../components/Version";
 
 
 export default function Home({navigation}){
@@ -29,7 +30,7 @@ export default function Home({navigation}){
             setId(_id)
         })
         .catch((err)=>{
-            console.log("somthing went worng while readin from localstorage and assigning vaue to id " + err )
+            console.log("somthing went worng while reading from localstorage and assigning value to id " + err )
         })
        
         await fetch(`${API}/distributer/read`,{
@@ -151,9 +152,11 @@ export default function Home({navigation}){
                     width: Dimensions.get("window").width,
                 }}>
 
-                <Button onPress={()=>{handleLogout()}} color={"red"} title="Click to Logout"/>
+<View style={styles.heightDivider}></View>
+                
+                <View style={styles.heightDivider}></View>
                     
-                <View>
+                <View style={styles.container}>
                     <Text style={styles.text}>Update Details</Text>
                     <TextInput onChangeText={(value)=>{setDetails({...details, name: value})}} value={details.name} style={styles.input} placeholder="Name"/>
                     <TextInput onChangeText={(value)=>{setDetails({...details, phone: value })}} value={details.phone} style={styles.input} keyboardType="number-pad" placeholder="Phone"/>
@@ -162,8 +165,8 @@ export default function Home({navigation}){
                     <View style={styles.heightDivider}></View>
                     <Button onPress={()=> handleUpdate()} title="Click to Update Info"/>
                 </View>
-
-                <View>
+                <View style={styles.heightDivider}></View>
+                <View style={styles.container}>
                 <Text style={styles.text}>Update Password</Text>
                    
                     <TextInput 
@@ -181,9 +184,17 @@ export default function Home({navigation}){
                     <View style={styles.heightDivider}></View>
                         <Button onPress={()=>{handlePasswordUpdate()}} title="Click to Update Password"/>
                     <View style={styles.heightDivider}></View>
+                    
                 </View>
+                <View style={styles.heightDivider}></View>
+                <Button style={styles.logout} onPress={()=>{handleLogout()}} color={"red"} title="Click to Logout"/>
+                <View style={styles.heightDivider}></View>
+
+                <Version/>
 
               </KeyboardAwareScrollView >
+
+              
   
        </>
     );
@@ -192,9 +203,9 @@ export default function Home({navigation}){
 
 const styles = StyleSheet.create({
   input : {
-    width: Dimensions.get("window").width-20 ,
+    width: Dimensions.get("window").width-50 ,
       fontSize: 15,
-      borderBottomWidth: 5,
+      borderBottomWidth: 2,
       marginTop: 15,
       marginLeft: 10,
       paddingTop: 15,
@@ -208,5 +219,15 @@ const styles = StyleSheet.create({
   },
   heightDivider : {
       height: 20
+  },
+  container: {
+      borderWidth: 2,
+      borderColor: "black",
+      padding: 5,
+      marginRight: 10,
+      marginLeft:10
+  },
+  logout: {
+      marginBottom: 10
   }
 })
